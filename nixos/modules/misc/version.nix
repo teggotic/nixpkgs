@@ -28,6 +28,7 @@ let
     DOCUMENTATION_URL = lib.optionalString (cfg.distroId == "nixos") "https://nixos.org/learn.html";
     SUPPORT_URL = lib.optionalString (cfg.distroId == "nixos") "https://nixos.org/community.html";
     BUG_REPORT_URL = lib.optionalString (cfg.distroId == "nixos") "https://github.com/NixOS/nixpkgs/issues";
+    SUPPORT_END = "2023-12-31";
   } // lib.optionalAttrs (cfg.variant_id != null) {
     VARIANT_ID = cfg.variant_id;
   };
@@ -138,6 +139,13 @@ in
         or have migrated all state on your system which is affected
         by this option.
       '';
+    };
+
+    defaultChannel = mkOption {
+      internal = true;
+      type = types.str;
+      default = "https://nixos.org/channels/nixos-23.05";
+      description = lib.mdDoc "Default NixOS channel to which the root user is subscribed.";
     };
 
     configurationRevision = mkOption {
