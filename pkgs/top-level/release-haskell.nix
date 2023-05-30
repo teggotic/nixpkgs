@@ -71,6 +71,8 @@ let
     ghc945
     ghc946
     ghc962
+    ghc961
+    ghc962
   ];
 
   # packagePlatforms applied to `haskell.packages.*`
@@ -484,9 +486,18 @@ let
       cabal-install = released;
       Cabal_3_10_1_0 = released;
       Cabal-syntax_3_10_1_0 = released;
-      cabal2nix = released;
-      cabal2nix-unstable = released;
-      funcmp = released;
+      cabal2nix = lib.subtractLists [
+        compilerNames.ghc961
+        compilerNames.ghc962
+      ] released;
+      cabal2nix-unstable = lib.subtractLists [
+        compilerNames.ghc961
+        compilerNames.ghc962
+      ] released;
+      funcmp = lib.subtractLists [
+        compilerNames.ghc961
+        compilerNames.ghc962
+      ] released;
       haskell-language-server = lib.subtractLists [
         # Support ceased as of 1.9.0.0
         compilerNames.ghc884
@@ -495,15 +506,19 @@ let
         compilerNames.ghc962
       ] released;
       hlint = lib.subtractLists [
+        compilerNames.ghc961
         compilerNames.ghc962
       ] released;
-      hpack = released;
+      hpack = lib.subtractLists [
+        compilerNames.ghc961
+        compilerNames.ghc962
+      ] released;
       hsdns = released;
       jailbreak-cabal = released;
-      language-nix = released;
-      large-hashable = [
-        compilerNames.ghc928
-      ];
+      language-nix = lib.subtractLists [
+        compilerNames.ghc961
+        compilerNames.ghc962
+      ] released;
       nix-paths = released;
       titlecase = released;
       ghc-api-compat = [
